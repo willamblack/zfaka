@@ -12,7 +12,7 @@ class UpgradeController extends AdminBasicController
 	public function init()
     {
         parent::init();
-		$this->all_version = ['1.0.0','1.0.2','1.0.3','1.0.4','1.0.5','1.0.6','1.0.7','1.0.8','1.0.9','1.1.0','1.1.1','1.1.2','1.1.3','1.1.4','1.1.5','1.1.6'];
+		$this->all_version = ['1.0.0','1.0.2','1.0.3','1.0.4','1.0.5','1.0.6','1.0.7','1.0.8','1.0.9','1.1.0','1.1.1','1.1.2','1.1.3','1.1.4','1.1.5','1.1.6','1.1.7'];
     }
 
     public function indexAction()
@@ -36,7 +36,7 @@ class UpgradeController extends AdminBasicController
 					$data['upgrade_sql'] = '';
 					$data['button'] = false;
 				}else{
-					if(version_compare(trim(VERSION), trim($update_version), '<=' )){
+					if(version_compare(trim($update_version),trim(VERSION),  '<=' )){
 						$data['update_version'] = $update_version;
 						$desc = @file_get_contents(INSTALL_PATH.'/'.$update_version.'/upgrade.txt');
 						$data['upgrade_desc'] = $desc;

@@ -43,9 +43,14 @@ class notify
 					if(!empty($order) AND !empty($product)){
 						if($product['auto']>0){
 							//3.自动处理
-							//查询通过订单中记录的pid，根据购买数量查询卡密
-							$cards = $m_products_card->Where(array('pid'=>$order['pid'],'active'=>0,'isdelete'=>0))->Limit($order['number'])->Select();
-							if(is_array($cards) AND !empty($cards) AND count($cards)==$order['number']){
+							//查询通过订单中记录的pid，根据购买数量查询卡密,修复
+							if($product['stockcontrol']>0){
+								$Limit = $order['number'];
+							}else{
+								$Limit = 1;
+							}
+							$cards = $m_products_card->Where(array('pid'=>$order['pid'],'active'=>0,'isdelete'=>0))->Limit($Limit)->Select();
+							if(is_array($cards) AND !empty($cards) AND count($cards)==$Limit){
 								//3.1 库存充足,获取对应的卡id,卡密
 								$card_mi_array = array_column($cards, 'card');
 								$card_mi_str = implode(',',$card_mi_array);
