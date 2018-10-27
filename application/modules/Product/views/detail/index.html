@@ -9,7 +9,8 @@
 		<?php endif;?>
         <div class="layui-col-md6">
             <div class="layui-card layui-form-pane">
-                <div class="layui-card-header">购买商品</div>
+                <div class="layui-card-header layui-hide-xs">购买商品</div>
+				<div class="layui-tab-brief layui-hide-md"><ul class="layui-tab-title"><li class="layui-this">购买商品</li><li class=""><a href="/product/query">查询订单</a></li></ul></div>
                 <div class="layui-card-body" id="prodcut_num">
                     <form class="layui-form" action="">
                         <div class="layui-form-item">
@@ -18,18 +19,22 @@
                                 <input type="text" name="name" id="name" readonly disabled class="layui-input" value ="<?php echo $product['name'];?>">
                             </div>
                         </div>
+						<div class="layui-col-md12 layui-col-xs6">
                         <div class="layui-form-item">
                             <label class="layui-form-label">商品单价</label>
                             <div class="layui-input-block">
                                 <input type="text" name="price" id="price" readonly disabled class="layui-input" value ="<?php echo $product['price'];?>">
                             </div>
                         </div>
+						</div>
+						<div class="layui-col-md12 layui-col-xs6">
                         <div class="layui-form-item">
                             <label class="layui-form-label">商品库存</label>
                             <div class="layui-input-block">
                                 <input type="text" name="qty" id="qty" readonly disabled class="layui-input" value ="<?php if($product['stockcontrol']>0):?><?php if($product['qty']>0):?><?php echo $product['qty'];?><?php else:?>库存不足<?php endif;?><?php else:?>不限量<?php endif;?>">
                             </div>
                         </div>
+						</div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">购买数量</label>
                             <div class="layui-input-block">
@@ -92,7 +97,7 @@
                 </div>
             </div>
         </div>
-        <div class="layui-col-md6 layui-hide-xs">
+        <div class="layui-col-md6 <?php if(isset($config['m_prodcut_description'])):?><?php if($config['m_prodcut_description']=="0"):?>layui-hide-xs<?php endif;?><?php else:?>layui-hide-xs<?php endif;?>">
             <div class="layui-card">
                 <div class="layui-card-header">商品详情</div>
                 <div class="layui-card-body" id="prodcut_description">
@@ -107,4 +112,9 @@
 <?php include COMMON_PATH.'/footer.html';?>
 <script>
 layui.use('product');
+<?php if(isset($config['layerad']) AND strlen($config['layerad'])>0):?>
+var LAYERAD = "<?php echo $config['layerad'];?>";
+<?php else:?>
+var LAYERAD = "";
+<?php endif;?>
 </script>
