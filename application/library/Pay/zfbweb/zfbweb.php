@@ -26,8 +26,8 @@ class zfbweb
 			'sign_type' => $payconfig['sign_type'],
 			'ali_public_key' => $payconfig['ali_public_key'],
 			'rsa_private_key' => $payconfig['rsa_private_key'],
-			'return_url' => $params['web_url']. '/product/query/?paymethod='.$this->paymethod.'&orderid='.$params['orderid'],
-			'notify_url' => $params['web_url'] . '/product/notify/?paymethod='.$this->paymethod,
+			'return_url' => $params['weburl']. '/product/query/?zlkbmethod=auto&paymethod='.$this->paymethod.'&orderid='.$params['orderid'],
+			'notify_url' => $params['weburl'] . '/product/notify/?paymethod='.$this->paymethod,
 			'return_raw' => true
 		];
 
@@ -40,8 +40,8 @@ class zfbweb
 		try {
 			$url = Charge::run(Config::ALI_CHANNEL_WEB, $config, $data);
 			if($url){
-				$result_params = array('type'=>1,'subjump'=>0,'paymethod'=>$this->paymethod,'url'=>$url,'payname'=>$payconfig['payname'],'overtime'=>$payconfig['overtime'],'money'=>$params['money']);
-				return array('code'=>1,'msg'=>'success','data'=>$result_params);
+				$result = array('type'=>1,'subjump'=>0,'paymethod'=>$this->paymethod,'url'=>$url,'payname'=>$payconfig['payname'],'overtime'=>$payconfig['overtime'],'money'=>$params['money']);
+				return array('code'=>1,'msg'=>'success','data'=>$result);
 			}else{
 				return array('code'=>1002,'msg'=>'生成失败','data'=>'');
 			}
@@ -63,7 +63,7 @@ class zfbweb
 				'app_id' => $payconfig['app_id'],
 				'sign_type' => $payconfig['sign_type'],
 				'ali_public_key' => $payconfig['ali_public_key'],
-				'rsa_private_key' => $payconfig['ali_public_key'],
+				'rsa_private_key' => $payconfig['rsa_private_key'],
 				'return_raw' => true
 			];
 			

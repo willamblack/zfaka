@@ -4,6 +4,7 @@ layui.define(['layer', 'form','jquery','base64','laytpl'], function(exports){
 	var form = layui.form;
 	var device = layui.device();
 	var laytpl = layui.laytpl;
+	var lodding;
 	
 	function createTime(v){
 		var date = new Date();
@@ -31,7 +32,6 @@ layui.define(['layer', 'form','jquery','base64','laytpl'], function(exports){
 			case '0':
 				oid = $.base64.encode(data.id);
 				str = '<span class="layui-badge layui-bg-gray">待付款</span>';
-				str += ',<a style="color:red" href="/product/order/pay/?oid='+oid+'">去支付</a>';
 				break;
 			case '1':
 				str = '<span class="layui-badge layui-bg-blue">待处理</span>';
@@ -56,12 +56,21 @@ layui.define(['layer', 'form','jquery','base64','laytpl'], function(exports){
             dataType: "json",
             url: "/product/query/kami",
             data: { "csrf_token": TOKEN,'orderid':orderid},
+			beforeSend: function () {
+				lodding = layer.load();
+			},
+			complete: function () {
+				layer.close(lodding);
+			},
+			error: function (data) {
+				ayer.close(lodding);
+			},
             success: function(res) {
                 if (res.code == 1) {
 					var html = "";
 					var list = res.data;
 					for (var i = 0, j = list.length; i < j; i++) {
-						html += '<p>卡密:'+list[i]+'</p>';
+						html += '<p>'+list[i]+'</p>';
 					}
 					layer.open({
 						type: 1

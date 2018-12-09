@@ -75,26 +75,32 @@ CREATE TABLE IF NOT EXISTS `t_config` (
 --
 
 INSERT INTO `t_config` (`id`, `catid`, `name`, `value`, `tag`, `lock`, `updatetime`) VALUES
-(1, 1, 'is_open_register', '0', '是否开放注册功能,1是开放,0是关闭', 1, 1453452674),
-(2, 1, 'limit_ip_order', '3', '同一ip当日下单限制（针对未付款订单）,不限制请设置为0', 1, 1453452674),
-(3, 1, 'limit_email_order', '3', '同一email当日下单限制（针对未付款订单）,不限制请设置为0', 1, 1453452674),
-(4, 1, 'web_url', 'http://faka.zlkb.net', '当前网站地址,用于支付站点异步返回，务必修改正确', 1, 1453452674),
-(5, 1, 'admin_email', '43036456@qq.com', '管理员邮箱,用于接收邮件提醒用', 1, 1453452674),
-(6, 1, 'web_name', 'ZFAKA平台', '当前站点名称', 1, 1453452674),
-(7, 1, 'web_description', '本系统由资料空白开发', '当前站点描述', 1, 1453452674),
+(1, 1, 'registerswitch', '0', '是否开放注册功能,1是开放,0是关闭', 1, 1453452674),
+(2, 1, 'limitiporder', '3', '同一ip当日下单限制（针对未付款订单）,不限制请设置为0', 1, 1453452674),
+(3, 1, 'limitemailorder', '3', '同一email当日下单限制（针对未付款订单）,不限制请设置为0', 1, 1453452674),
+(4, 1, 'weburl', 'http://faka.zlkb.net', '当前网站地址,用于支付站点异步返回，务必修改正确', 1, 1453452674),
+(5, 1, 'adminemail', '43036456@qq.com', '管理员邮箱,用于接收邮件提醒用', 1, 1453452674),
+(6, 1, 'webname', 'ZFAKA平台', '当前站点名称', 1, 1453452674),
+(7, 1, 'webdescription', '本系统由资料空白开发', '当前站点描述', 1, 1453452674),
 (8, 1, 'notice', '本系统商品均可正常购买。开源下载地址：github地址:&lt;a href=&quot;https://github.com/zlkbdotnet/zfaka/&quot; target=&quot;_blank&quot;&gt;https://github.com/zlkbdotnet/zfaka/&lt;/a&gt;', '首页公告', 1, 1453452674),
 (9, 1, 'ad', '&lt;image src=&quot;/res/images/pay/supportme.jpg&quot;&gt;', '购买页默认内容', 1, 1453452674),
-(10, 1, 'yzm_switch', '1', '验证码开关(1开，0关)', 1, 1453452674),
-(11, 1, 'order_input_type', '2', '订单必填输入框选择: 1邮箱 2QQ', 1, 1453452674),
-(12, 1, 'index_tpl', 'default', '首页显示模式，筛选(default)|列表(list)', 1, 1453452674),
+(10, 1, 'yzmswitch', '1', '验证码开关(1开，0关)', 1, 1453452674),
+(11, 1, 'orderinputtype', '2', '订单必填输入框选择: 1邮箱 2QQ', 1, 1453452674),
+(12, 1, 'tplindex', 'default', '首页显示模式，筛选(default)|列表(list)', 1, 1453452674),
 (13, 1, 'logo', '/res/images/logo.png', 'LOGO地址,默认：/res/images/logo.png', 1, 1453452674),
-(14, 1, 'tongji', '/', '统计脚本', 1, 1453452674),
-(15, 1, 'm_prodcut_description', '0', '移动端商品详情，隐藏(0)|显示(1)', 1, 1453452674),
-(16, 1, 'order_prefix', 'zlkb', '订单前缀，建议不要超过5个字符串', 1, 1453452674),
+(14, 1, 'tongji', '<!--统计js-->', '统计脚本', 1, 1453452674),
+(15, 1, 'mprodcutdescriptionswitch', '0', '移动端商品详情，隐藏(0)|显示(1)', 1, 1453452674),
+(16, 1, 'orderprefix', 'zlkb', '订单前缀，建议不要超过5个字符串', 1, 1453452674),
 (17, 1, 'backgroundimage', 'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/6a600c338744ebf894c9e667dff9d72a6059a72a.jpg', '前台背景图片地址', 1, 1453452674),
 (18, 1, 'headermenucolor', 'layui-bg-black', '前台顶部菜单配色方案', 1, 1453452674),
-(19, 1, 'mousejqtx', 'mousejqtxstars', '鼠标特效', 1, 1453452674),
-(20, 1, 'layerad', '', '弹窗广告', 1, 1453452674);
+(19, 1, 'mousejqtx', '', '鼠标特效', 1, 1453452674),
+(20, 1, 'layerad', '', '弹窗广告', 1, 1453452674),
+(21, 1, 'loginswitch', '1', '登录开关', 1, 1453452674),
+(22, 1, 'forgetpwdswitch', '0', '找回密码开关', 1, 1453452674),
+(23, 1, 'adminyzmswitch', '1', '后台登录验证码开关', 1, 1453452674),
+(24, 1, 'shortcuticon', '', 'ICO图标,格式必须是png或者ico或者gif', 1, 1453452674),
+(25, 1, 'limitorderqty', '5', '单笔订单数量限制', 1, 1453452674),
+(26, 1, 'discountswitch', '0', '折扣开关', 1, 1453452674);
 -- --------------------------------------------------------
 
 --
@@ -253,9 +259,10 @@ INSERT INTO `t_payment` (`id`, `payment`, `payname`, `payimage`, `alias`, `sign_
 (4, '码支付-微信扫码支付', '微信', '/res/images/pay/weixin.jpg', 'codepaywx', 'RSA2', '', '', '', '','',300, 0),
 (5, '支付宝电脑网站支付', '支付宝', '/res/images/pay/alipay.jpg', 'zfbweb', 'RSA2', '2018********', '', '', '', '',0, 0),
 (6, '微信扫码支付', '微信', '/res/images/pay/weixin.jpg', 'wxf2f', 'MD5', '', '', '', '', '', 0, 0),
-(7, '有赞接口', '有赞', '/res/images/pay/yzpay.jpg', 'yzpay', 'RSA2', '', '', '', '', '', 0, 0),
-(8, '收款宝', '微信', '/res/images/pay/weixin.jpg', 'zlkbcodepaywx', 'RSA2', '', '', '', '', '', 300, 0);
-
+(7, '有赞接口', '微信', '/res/images/pay/yzpay.jpg', 'yzpay', 'RSA2', '', '', '', '', '', 0, 0),
+(8, '收款宝(微信)', '微信', '/res/images/pay/weixin.jpg', 'zlkbcodepaywx', 'RSA2', '', '', '', '', '', 300, 0),
+(9, '收款宝(支付宝)', '支付宝', '/res/images/pay/alipay.jpg', 'zlkbcodepayalipay', 'RSA2', '', '', '', '', '', 300, 0),
+(10, '收款宝(QQ)', 'QQ', '/res/images/pay/qqpay.jpg', 'zlkbcodepayqq', 'RSA2', '', '', '', '', '', 300, 0);
 
 -- --------------------------------------------------------
 
@@ -268,6 +275,7 @@ CREATE TABLE IF NOT EXISTS `t_products` (
   `typeid` int(11) NOT NULL DEFAULT '1' COMMENT '类型id',
   `active` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未激活 1激活',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '产品名',
+  `password` varchar(60) NOT NULL DEFAULT '' COMMENT '密码',
   `description` text COMMENT '描述',
   `stockcontrol` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0不控制,1控制',
   `qty` int(11) NOT NULL DEFAULT '0' COMMENT '数量',
@@ -283,8 +291,8 @@ CREATE TABLE IF NOT EXISTS `t_products` (
 -- 转存表中的数据 `t_products`
 --
 
-INSERT INTO `t_products` (`id`, `typeid`, `active`, `name`, `description`, `stockcontrol`, `qty`, `price`, `auto`, `sort_num`, `addtime`,`isdelete`) VALUES
-(1, 1, 1, '测试商品', '测试使用', 0, 0, '0.10', 1, 99, 1528962221,0);
+INSERT INTO `t_products` (`id`, `typeid`, `active`, `name`, `password`,`description`, `stockcontrol`, `qty`, `price`, `auto`, `sort_num`, `addtime`,`isdelete`) VALUES
+(1, 1, 1, '测试商品', '','测试使用', 0, 0, '0.10', 1, 99, 1528962221,0);
 
 -- --------------------------------------------------------
 
@@ -317,6 +325,8 @@ INSERT INTO `t_products_card` (`id`, `pid`, `card`, `addtime`, `active`,`isdelet
 CREATE TABLE IF NOT EXISTS `t_products_type` (
   `id` int(11) NOT NULL,
   `name` varchar(55) NOT NULL DEFAULT '' COMMENT '类型命名',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '分类描述',
+  `password` varchar(60) NOT NULL DEFAULT '' COMMENT '分类密码',
   `sort_num` int(11) NOT NULL DEFAULT '1' COMMENT '排序',
   `active` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未激活,1已激活',
   `isdelete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未删除,1已删除'
@@ -326,8 +336,8 @@ CREATE TABLE IF NOT EXISTS `t_products_type` (
 -- 转存表中的数据 `t_products_type`
 --
 
-INSERT INTO `t_products_type` (`id`, `name`, `sort_num`, `active`,`isdelete`) VALUES
-(1, '测试商品', 1, 1,0);
+INSERT INTO `t_products_type` (`id`, `name`, `description`,`password`,`sort_num`, `active`,`isdelete`) VALUES
+(1, '测试商品', '测试商品','',1, 1,0);
 
 -- --------------------------------------------------------
 
@@ -419,10 +429,22 @@ CREATE TABLE IF NOT EXISTS `t_user_login_logs` (
   `addtime` int(11) NOT NULL DEFAULT '0' COMMENT '登录时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+CREATE TABLE IF NOT EXISTS `t_products_pifa` (
+  `id` int(11) NOT NULL,
+  `pid` int(11) NOT NULL DEFAULT '0' COMMENT '商品d',
+  `qty` int(11) NOT NULL DEFAULT '0' COMMENT '数量',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '优惠价格',
+  `tag` varchar(255) NOT NULL COMMENT '简单说明',
+  `addtime` int(11) NOT NULL DEFAULT '0' COMMENT '添加时间',
+  `isdelete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未删除,1已删除'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Indexes for dumped tables
 --
-
+ALTER TABLE `t_products_pifa`
+  ADD PRIMARY KEY (`id`);
 --
 -- Indexes for table `t_admin_login_log`
 --
@@ -623,6 +645,10 @@ ALTER TABLE `t_user_group`
 --
 -- AUTO_INCREMENT for table `t_user_login_logs`
 --
+
+ALTER TABLE `t_products_pifa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
 ALTER TABLE `t_user_login_logs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -23,6 +23,11 @@ class RegisterController extends PcBasicController
             $this->redirect("/member/");
             return FALSE;
         }
+		if(isset($this->config['registerswitch']) AND $this->config['registerswitch']<1){
+            $this->redirect("/product/");
+            return FALSE;
+		}
+		
 		$data = array();
 		$data['title'] = "注册";
         $this->getView()->assign($data);
@@ -30,20 +35,20 @@ class RegisterController extends PcBasicController
 
 	public function ajaxAction()
 	{
-		if(isset($this->config['is_open_register']) AND $this->config['is_open_register']<1){
+		if(isset($this->config['registerswitch']) AND $this->config['registerswitch']<1){
 			$data = array('code' => 1000, 'msg' => '本系统关闭注册功能');
 			Helper::response($data);
 		}
-		$email    = $this->getPost('email',false);
-		$password = $this->getPost('password',false);
-		$nickname = $this->getPost('nickname',false);
+		$email    = $this->getPost('email');
+		$password = $this->getPost('password');
+		$nickname = $this->getPost('nickname');
 		$csrf_token = $this->getPost('csrf_token', false);
-		
+
 		if($email AND $password AND $nickname AND $csrf_token){
 			if ($this->VerifyCsrfToken($csrf_token)) {
 				if(isEmail($email)){
-					if(isset($this->config['yzm_switch']) AND $this->config['yzm_switch']>0){
-						$vercode = $this->getPost('vercode',false);
+					if(isset($this->config['yzmswitch']) AND $this->config['yzmswitch']>0){
+						$vercode = $this->getPost('vercode');
 						if($vercode){
 							if(strtolower($this->getSession('registerCaptcha')) == strtolower($vercode)){
 								$this->unsetSession('registerCaptcha');
@@ -60,6 +65,8 @@ class RegisterController extends PcBasicController
 						//检查邮箱是否已经使用
 					$checkEmailUser = $this->m_user->checkEmail($email);
 					if(empty($checkEmailUser)){
+						$nickname_string = new \Safe\MyString($nickname);
+						$nickname = $nickname_string->trimall()->getValue();
 						$m = array('email'=>$email,'password'=>$password,'nickname'=>$nickname);
 						$newUser = $this->m_user->newRegister($m);
 						if($newUser){
